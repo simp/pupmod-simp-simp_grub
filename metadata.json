@@ -1,0 +1,56 @@
+{
+  "name": "simp-simp_grub",
+  "version": "0.1.0",
+  "author": "SIMP Team",
+  "summary": "Common GRUB management items",
+  "license": "Apache-2.0",
+  "source": "https://github.com/simp/pupmod-simp-simp_grub",
+  "project_page": "https://github.com/simp/pupmod-simp-simp_grub",
+  "issues_url": "https://simp-project.atlassian.net",
+  "tags": [
+    "simp"
+  ],
+  "dependencies": [
+    {
+      "name": "herculesteam/augeasproviders_grub",
+      "version_requirement": ">= 3.1.0 < 4.0.0"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.13.1 < 6.0.0"
+    },
+    {
+      "name": "simp/simplib",
+      "version_requirement": ">= 3.15.0 < 4.0.0"
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 5.0.0 < 7.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    }
+  ]
+}
