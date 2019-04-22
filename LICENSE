@@ -1,32 +1,24 @@
-pupmod-simp-simp_grub - Basic GRUB configuration
+pupmod-simp-simp_grub - A Puppet module for managing basic GRUB configuration
 
 --
 
 Per Section 105 of the Copyright Act of 1976, these works are not entitled to
 domestic copyright protection under US Federal law.
 
-      "License" shall mean the terms and conditions for use, reproduction,
-      and distribution as defined by Sections 1 through 9 of this document.
+The US Government retains the right to pursue copyright protections outside of
+the United States.
 
 The United States Government has unlimited rights in this software and all
 derivatives thereof, pursuant to the contracts under which it was developed and
 the License under which it falls.
 
-      "Legal Entity" shall mean the union of the acting entity and all
-      other entities that control, are controlled by, or are under common
-      control with that entity. For the purposes of this definition,
-      "control" means (i) the power, direct or indirect, to cause the
-      direction or management of such entity, whether by contract or
-      otherwise, or (ii) ownership of fifty percent (50%) or more of the
-      outstanding shares, or (iii) beneficial ownership of such entity.
+---
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-      "Source" form shall mean the preferred form for making modifications,
-      including but not limited to software source code, documentation
-      source, and configuration files.
+    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
