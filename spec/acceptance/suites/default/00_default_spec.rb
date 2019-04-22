@@ -63,7 +63,7 @@ describe 'simp_grub class' do
                 apply_manifest_on(host, manifest, :catch_failures => true)
               end
 
-              it 'should have a the known password hash' do
+              it 'should have the known password hash' do
                 expect(password_entries.first).to match(/^password\s+--encrypted\s+#{Regexp.escape(pw_hash)}$/)
               end
             end
