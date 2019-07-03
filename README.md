@@ -6,9 +6,26 @@
 
 #### Table of Contents
 
+<!-- vim-markdown-toc GFM -->
+
+* [Overview](#overview)
+* [This is a SIMP module](#this-is-a-simp-module)
+* [Module Description](#module-description)
+* [Setup](#setup)
+  * [What simp_grub affects](#what-simp_grub-affects)
+* [Usage](#usage)
+  * [GRUB2](#grub2)
+* [Limitations](#limitations)
+* [Development](#development)
+  * [Unit tests](#unit-tests)
+  * [Acceptance tests](#acceptance-tests)
+
+<!-- vim-markdown-toc -->
+
 ## Overview
 
 ## This is a SIMP module
+
 This module is a component of the [System Integrity Management Platform](https://simp-project.com)
 
 If you find any issues, please submit them via [JIRA](https://simp-project.atlassian.net/).
@@ -22,13 +39,34 @@ Provides a Hiera-friendly interface to GRUB configuration activities.
 Currently supports setting administrative GRUB passwords on both GRUB 2 and
 legacy GRUB systems.
 
+See [REFERENCE.md](REFERENCE.md) for more details.
+
 ## Setup
 
 ### What simp_grub affects
 
 `simp_grub` helps manage the GRUB configuration on your systems.
 
-# Limitations
+## Usage
+
+Simply ``include simp_grub`` and set the ``simp_grub::password`` parameter to
+password protect GRUB.
+
+Password entries that do not start with `$1$`, `$5$`, or `$6$` will be encrypted
+for you.
+
+### GRUB2
+
+If your system supports GRUB2, you can also set up the administrative username.
+
+Example: Set the admin username:
+
+```yaml
+---
+simp_grub::admin: my_admin_username
+```
+
+## Limitations
 
 SIMP Puppet modules are generally intended to be used on a Red Hat Enterprise
 Linux-compatible distribution such as EL6 and EL7.

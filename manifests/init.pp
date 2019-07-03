@@ -1,4 +1,4 @@
-# Manage common GRUB attributes
+# @summary Manage common GRUB attributes
 #
 # Advanced configuration will need to use the `augeasproviders_grub` components
 # directly.
