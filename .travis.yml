@@ -6,8 +6,8 @@
 # ------------------------------------------------------------------------------
 # Release       Puppet   Ruby   EOL
 # PE 2017.3     5.3      2.4.5  2018-12-31
-# SIMP 6.3      5.5.10   2.4.5  TBD***
-# PE 2018.1     5.5.8    2.4.5  2020-05 (LTS)***
+# SIMP 6.3      5.5      2.4.5  TBD***
+# PE 2018.1     5.5      2.4.5  2020-05 (LTS)***
 # PE 2019.0     6.0      2.5.1  2019-08-31^^^
 #
 # *** = Modules created for SIMP 6.3+ are not required to support Puppet < 5.5
@@ -35,6 +35,7 @@ addons:
 
 before_install:
   - rm -f Gemfile.lock
+  - for x in ${HOME}/.rvm/gems/*; do gem uninstall -I -x -i "${x}" -v '>= 1.17' bundler || true; gem uninstall -I -x -i "${x}@global" -v '>= 1.17' bundler || true; done
   - gem install -v '~> 1.17' bundler
 
 global:
@@ -61,28 +62,28 @@ jobs:
       rvm: 2.4.5
       env: PUPPET_VERSION="~> 5.3.0"
       script:
-        - bundle exec rake spec_parallel
+        - bundle exec rake spec
 
     - stage: spec
       rvm: 2.4.5
       name: 'Puppet 5.5 (SIMP 6.3, PE 2018.1)'
       env: PUPPET_VERSION="~> 5.5.0"
       script:
-        - bundle exec rake spec_parallel
+        - bundle exec rake spec
 
     - stage: spec
       name: 'Latest Puppet 5.x'
       rvm: 2.4.5
       env: PUPPET_VERSION="~> 5.0"
       script:
-        - bundle exec rake spec_parallel
+        - bundle exec rake spec
 
     - stage: spec
       name: 'Latest Puppet 6.x'
       rvm: 2.5.1
       env: PUPPET_VERSION="~> 6.0"
       script:
-        - bundle exec rake spec_parallel
+        - bundle exec rake spec
 
     - stage: deploy
       rvm: 2.4.5
