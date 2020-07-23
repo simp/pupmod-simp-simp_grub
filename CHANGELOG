@@ -1,3 +1,6 @@
+* Thu Jul 20 2020 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 0.2.1-0
+- update the upper bound of simplib for SIMP 6.5 release
+
 * Mon Mar 30 2020 Trevor Vaughan <tvaughan@onyxpoint.com> - 0.2.0-0
 - Add EL8 support
 
