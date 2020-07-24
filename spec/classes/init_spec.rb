@@ -8,6 +8,7 @@ describe 'simp_grub' do
           os_facts
         end
 
+        let(:uniqueid) { '0875ff34' }
         context 'with useful parameters' do
           let(:params){{
             :password => 'useful parameters',
@@ -66,8 +67,8 @@ describe 'simp_grub' do
               let(:test_pass) {
                 require 'digest'
 
-                '$1$' + os_facts[:uniqueid] + '$' +
-                  Digest::MD5.hexdigest('my password' + os_facts[:uniqueid])
+                '$1$' + "#{:uniqueid}" + '$' +
+                  Digest::MD5.hexdigest('my password' + "#{:uniqueid}")
               }
 
               it { is_expected.to create_exec('Set Grub Password').with_unless("grep -qx 'password --encrypted #{test_pass}' /etc/grub.conf") }
@@ -77,8 +78,8 @@ describe 'simp_grub' do
               let(:test_pass) {
                 require 'digest'
 
-                '$5$' + os_facts[:uniqueid] + '$' +
-                  Digest::SHA2.new(256).hexdigest('my password' + os_facts[:uniqueid])
+                '$5$' + "#{:uniqueid}" + '$' +
+                  Digest::SHA2.new(256).hexdigest('my password' + "#{:uniqueid}")
               }
 
               it { is_expected.to create_exec('Set Grub Password').with_unless("grep -qx 'password --encrypted #{test_pass}' /etc/grub.conf") }
@@ -88,8 +89,8 @@ describe 'simp_grub' do
               let(:test_pass) {
                 require 'digest'
 
-                '$5$' + os_facts[:uniqueid] + '$' +
-                  Digest::SHA2.new(512).hexdigest('my password' + os_facts[:uniqueid])
+                '$5$' + "#{:uniqueid}" + '$' +
+                  Digest::SHA2.new(512).hexdigest('my password' + "#{:uniqueid}")
               }
 
               it { is_expected.to create_exec('Set Grub Password').with_unless("grep -qx 'password --encrypted #{test_pass}' /etc/grub.conf" ) }
