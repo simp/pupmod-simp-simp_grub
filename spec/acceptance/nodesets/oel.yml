@@ -16,11 +16,6 @@ HOSTS:
     platform: el-8-x86_64
     box: generic/oracle8
     hypervisor: <%= hypervisor %>
-  el6:
-    platform: el-6-x86_64
-    box: onyxpoint/oel-6-x86_64
-    hypervisor: <%= hypervisor %>
-
 CONFIG:
   log_level: verbose
   synced_folder : disabled
