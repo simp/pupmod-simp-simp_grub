@@ -16,11 +16,6 @@ HOSTS:
     platform: el-8-x86_64
     box: centos/8
     hypervisor: <%= hypervisor %>
-  el6:
-    platform: el-6-x86_64
-    box: centos/6
-    hypervisor: <%= hypervisor %>
-
 CONFIG:
   log_level: verbose
   synced_folder : disabled
