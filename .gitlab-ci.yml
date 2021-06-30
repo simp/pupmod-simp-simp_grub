@@ -332,13 +332,6 @@ pup7.x-unit:
 # Repo-specific content
 # ==============================================================================
 
-# FIXME: `compliance` suite doesn't exist
-#pup5.pe-fips-compliance:
-#  <<: *pup_5_pe
-#  <<: *compliance_base
-#  script:
-#    - 'BEAKER_fips=yes bundle exec rake beaker:suites[compliance]'
-
 pup6.pe:
   <<: *pup_6_pe
   <<: *acceptance_base
@@ -369,4 +362,10 @@ pup6.pe-oel-fips:
 #  <<: *pup_6_pe
 #  <<: *compliance_base
 #  script:
-#    - 'BEAKER_fips=yes bundle exec rake beaker:suites[compliance]'
+#    - 'BEAKER_fips=yes bundle exec rake beaker:suites[compliance,default]'
+
+pup7.x:
+  <<: *pup_7_x
+  <<: *acceptance_base
+  script:
+    - 'bundle exec rake beaker:suites[default,default]'
