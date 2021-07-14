@@ -15,6 +15,7 @@
   * [What simp_grub affects](#what-simp_grub-affects)
 * [Usage](#usage)
   * [GRUB2](#grub2)
+  * [Legacy GRUB](#legacy-grub)
 * [Limitations](#limitations)
 * [Development](#development)
   * [Unit tests](#unit-tests)
@@ -41,6 +42,9 @@ legacy GRUB systems.
 
 See [REFERENCE.md](REFERENCE.md) for more details.
 
+See [herculesteam/augeasproviders_grub](https://forge.puppet.com/modules/herculesteam/augeasproviders_grub)
+for additional information on GRUB management.
+
 ## Setup
 
 ### What simp_grub affects
@@ -52,12 +56,9 @@ See [REFERENCE.md](REFERENCE.md) for more details.
 Simply ``include simp_grub`` and set the ``simp_grub::password`` parameter to
 password protect GRUB.
 
-Password entries that do not start with `$1$`, `$5$`, or `$6$` will be encrypted
-for you.
-
 ### GRUB2
 
-If your system supports GRUB2, you can also set up the administrative username.
+You must set the administrative username on GRUB2 systems.
 
 Example: Set the admin username:
 
@@ -66,10 +67,20 @@ Example: Set the admin username:
 simp_grub::admin: my_admin_username
 ```
 
+Passwords that are not in PBKDF2 format will be encrypted for you.
+
+### Legacy GRUB
+
+On legacy systems, password entries that do not start with `$1$`, `$5$`, or
+`$6$` will be encrypted for you.
+
 ## Limitations
 
 SIMP Puppet modules are generally intended to be used on a Red Hat Enterprise
-Linux-compatible distribution such as EL6 and EL7.
+Linux-compatible distributions.
+
+See [metadata.json](./metadata.json) for the full list of supported operating
+systems.
 
 ## Development
 

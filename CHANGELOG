@@ -1,3 +1,6 @@
+* Wed Jul 14 2021 Trevor Vaughan <tvaughan@onyxpoint.com> - 0.3.1
+- Updated documentation to better reflect GRUB2
+
 * Thu Jun 17 2021 Chris Tessmer <chris.tessmer@onyxpoint.com> - 0.3.0
 - Removed support for Puppet 5
 - Ensured support for Puppet 7 in requirements and stdlib
