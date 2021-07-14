@@ -7,8 +7,11 @@
 #   The GRUB administrative password, if not in the hashed form, will be
 #   converted for you.
 #
-#   If a password starts with '$1$', '$5$', or '$6$' then it is assumed to be
-#   encrypted.
+#   * GRUB2
+#     * If a password is in PBKDF2 form, then it is assumed to be encrypted.
+#   * Legacy GRUB
+#     * If a password starts with '$1$', '$5$', or '$6$' then it is assumed to be
+#       encrypted.
 #
 # @param admin
 #   The administrative username GRUB 2 systems.
