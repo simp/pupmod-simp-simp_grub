@@ -49,7 +49,7 @@ class simp_grub (
       $_password = pw_hash(
         $password,
         'SHA-512',
-        fqdn_rand_string(8, undef, $facts['fqdn'])
+        fqdn_rand_string(8, undef, $facts['networking']['fqdn'])
       )
     }
 
