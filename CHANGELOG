@@ -1,3 +1,6 @@
+* Thu Sep 14 2023 Mike Riddle <mike@sicura.us> - 0.5.1
+- Increased the upper bound on the version of the augeasproviders_grub dependency in metadata.json
+
 * Wed Aug 23 2023 Steven Pritchard <steve@sicura.us> - 0.5.0
 - Add AlmaLinux 8 support
 
