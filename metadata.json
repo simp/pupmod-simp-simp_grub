@@ -12,7 +12,7 @@
   ],
   "dependencies": [
     {
-      "name": "herculesteam/augeasproviders_grub",
+      "name": "puppet/augeasproviders_grub",
       "version_requirement": ">= 3.1.0 < 6.0.0"
     },
     {
