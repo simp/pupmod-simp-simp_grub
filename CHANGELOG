@@ -1,3 +1,11 @@
+* Fri Oct 06 2023 Steven Pritchard <steve@sicura.us> - 0.6.0
+- [puppetsync] Updates for Puppet 8
+  - These updates may include the following:
+    - Update Gemfile
+    - Add support for Puppet 8
+    - Drop support for Puppet 6
+    - Update module dependencies
+
 * Thu Sep 14 2023 Mike Riddle <mike@sicura.us> - 0.5.1
 - Increased the upper bound on the version of the augeasproviders_grub dependency in metadata.json
 
