@@ -15,7 +15,7 @@ unless ENV['BEAKER_provision'] == 'no'
   end
 end
 
-parallel = { :run_in_parallel => ['yes', 'true', 'on'].include?(ENV['BEAKER_SIMP_parallel']) }
+parallel = { run_in_parallel: ['yes', 'true', 'on'].include?(ENV['BEAKER_SIMP_parallel']) }
 
 RSpec.configure do |c|
   # ensure that environment OS is ready on each host
@@ -30,51 +30,46 @@ RSpec.configure do |c|
 
   # Configure all nodes in nodeset
   c.before :suite do
-    begin
-      # Install modules and dependencies from spec/fixtures/modules
-      copy_fixture_modules_to( hosts )
+    # Install modules and dependencies from spec/fixtures/modules
+    copy_fixture_modules_to(hosts)
 
-      # Make sure that the SIMP default environment files are in place if they
-      # exist
-      block_on(hosts, parallel) do |sut|
-        environment = on(sut, %q(puppet config print environment)).output.strip
+    # Make sure that the SIMP default environment files are in place if they
+    # exist
+    block_on(hosts, parallel) do |sut|
+      environment = on(sut, 'puppet config print environment').output.strip
 
-        tgt_path = '/var/simp/environments'
+      tgt_path = '/var/simp/environments'
 
-        found = false
-        on(sut, %Q(puppet config print modulepath --environment #{environment})).output.strip.split(':').each do |mod_path|
-          if on(sut, "ls #{mod_path}/simp_environment 2>/dev/null ", :accept_all_exit_codes => true).exit_code == 0
+      found = false
+      on(sut, %(puppet config print modulepath --environment #{environment})).output.strip.split(':').each do |mod_path|
+        next unless on(sut, "ls #{mod_path}/simp_environment 2>/dev/null ", accept_all_exit_codes: true).exit_code == 0
 
-            unless found
-              on(sut, %Q(mkdir -p #{tgt_path}))
-            end
-
-            found = true
-
-            on(sut, %Q(cp -r #{mod_path}/simp_environment #{tgt_path}))
-            on(sut, %Q(rm -rf #{mod_path}/simp_environment))
-          end
+        unless found
+          on(sut, %(mkdir -p #{tgt_path}))
         end
 
-        if found
-          on(sut, %Q(mv #{tgt_path}/simp_environment #{tgt_path}/#{environment}))
-        end
+        found = true
+
+        on(sut, %(cp -r #{mod_path}/simp_environment #{tgt_path}))
+        on(sut, %(rm -rf #{mod_path}/simp_environment))
       end
 
-      # Generate and install PKI certificates on each SUT
-      Dir.mktmpdir do |cert_dir|
-        run_fake_pki_ca_on(default, hosts, cert_dir )
-        hosts.each{ |sut| copy_pki_to( sut, cert_dir, '/etc/pki/simp-testing' )}
-      end
-
-      # add PKI keys
-      copy_keydist_to(default)
-    rescue StandardError, ScriptError => e
-      if ENV['PRY']
-        require 'pry'; binding.pry
-      else
-        raise e
+      if found
+        on(sut, %(mv #{tgt_path}/simp_environment #{tgt_path}/#{environment}))
       end
     end
+
+    # Generate and install PKI certificates on each SUT
+    Dir.mktmpdir do |cert_dir|
+      run_fake_pki_ca_on(default, hosts, cert_dir)
+      hosts.each { |sut| copy_pki_to(sut, cert_dir, '/etc/pki/simp-testing') }
+    end
+
+    # add PKI keys
+    copy_keydist_to(default)
+  rescue StandardError, ScriptError => e
+    raise e unless ENV['PRY']
+    require 'pry'
+    binding.pry # rubocop:disable Lint/Debugger
   end
 end
