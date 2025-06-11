@@ -103,9 +103,11 @@ describe 'simp_grub class' do
           end
 
           context 'with pregenerated password hash' do
+            # rubocop:disable Layout/LineLength
             let(:pw_hash) do
               'grub.pbkdf2.sha512.10000.A6450DF58428B9AFDC4CED89BE2B94C74ACB153FD01BEDE4F6AEDA661854E987B1B00675533E270FFCC71FAE914789D06071704CAB9BCBB539F95C0D6952EB78.83D980313DBAE4DFE9F66EA23F91425416B4D4C816C42B6ACC0D46BBA25750203D056D5C7F103BC1A350F24F0C4AA8850961D18FD9132640723A3810BB741E4F'
             end
+            # rubocop:enable Layout/LineLength
 
             let(:hieradata) do
               {
