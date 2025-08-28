@@ -14,7 +14,7 @@ describe 'simp_grub' do
           let(:params) do
             {
               password: 'useful parameters',
-           admin: 'root'
+              admin: 'root',
             }
           end
 
@@ -25,10 +25,10 @@ describe 'simp_grub' do
             it { is_expected.to create_exec('Set Grub Password') }
           else
             it {
-              is_expected.to create_grub_user(params[:admin]).with({
-                                                                     password: params[:password],
-                superuser: true
-                                                                   })
+              is_expected.to create_grub_user(params[:admin]).with(
+                password: params[:password],
+                superuser: true,
+              )
             }
           end
         end
@@ -37,10 +37,10 @@ describe 'simp_grub' do
           let(:params) do
             {
               password: 'all parameters',
-           admin: 'root',
-           purge_unmanaged_users: true,
-           report_unmanaged_users: true,
-           hash_rounds: 10_000
+              admin: 'root',
+              purge_unmanaged_users: true,
+              report_unmanaged_users: true,
+              hash_rounds: 10_000,
             }
           end
 
@@ -51,13 +51,13 @@ describe 'simp_grub' do
             it { is_expected.to create_exec('Set Grub Password') }
           else
             it {
-              is_expected.to create_grub_user(params[:admin]).with({
-                                                                     password: params[:password],
+              is_expected.to create_grub_user(params[:admin]).with(
+                password: params[:password],
                 superuser: true,
                 report_unmanaged: params[:report_unmanaged_users],
                 purge: params[:purge_unmanaged_users],
-                rounds: params[:hash_rounds]
-                                                                   })
+                rounds: params[:hash_rounds],
+              )
             }
           end
         end
@@ -66,7 +66,7 @@ describe 'simp_grub' do
           context 'with GRUB 0.99' do
             let(:params) do
               {
-                password: test_pass
+                password: test_pass,
               }
             end
 
@@ -107,7 +107,7 @@ describe 'simp_grub' do
           context 'with GRUB 2' do
             let(:params) do
               {
-                password: 'grub two'
+                password: 'grub two',
               }
             end
 

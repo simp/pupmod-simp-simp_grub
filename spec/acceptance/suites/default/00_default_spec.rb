@@ -5,7 +5,7 @@ test_name 'simp_grub'
 
 describe 'simp_grub class' do
   let(:manifest) do
-    <<-EOS
+    <<~EOS
       include 'simp_grub'
     EOS
   end
@@ -22,7 +22,7 @@ describe 'simp_grub class' do
         let(:hieradata) do
           {
             'simp_grub::password' => 'test password',
-           'simp_grub::admin' => 'admin'
+            'simp_grub::admin'    => 'admin',
           }
         end
 
@@ -57,7 +57,7 @@ describe 'simp_grub class' do
               let(:hieradata) do
                 {
                   'simp_grub::password' => pw_hash,
-                'simp_grub::admin' => 'admin'
+                  'simp_grub::admin'    => 'admin',
                 }
               end
 
@@ -112,7 +112,7 @@ describe 'simp_grub class' do
             let(:hieradata) do
               {
                 'simp_grub::password' => pw_hash,
-               'simp_grub::admin' => 'admin'
+                'simp_grub::admin'    => 'admin',
               }
             end
 
