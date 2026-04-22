@@ -107,7 +107,7 @@ jobs:
         puppet:
           - label: 'Puppet 8.x'
             puppet_version: '~> 8.0'
-            ruby_version: '4.0'
+            ruby_version: '3.2'
             experimental: false
       fail-fast: false
     env:
@@ -147,7 +147,7 @@ jobs:
       - name: setup ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 4.0.3
+          ruby-version: '3.2'
           bundler: '2.7.2'
       - name: bundle install
         run: bundle _2.7.2_ install
