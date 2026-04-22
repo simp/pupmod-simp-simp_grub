@@ -1,3 +1,8 @@
+* Wed Apr 22 2026 Mike Riddle <mike@sicura.us> - 1.0.0
+- Removed legacy grub support
+- Removed el7 support
+- Added el10 support
+
 * Mon Oct 23 2023 Steven Pritchard <steve@sicura.us> - 0.7.0
 - [puppetsync] Add EL9 support
 

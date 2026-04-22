@@ -32,19 +32,13 @@ Data type: `String[1]`
 The GRUB administrative password, if not in the hashed form, will be
 converted for you.
 
-* GRUB2
-  * If a password is in PBKDF2 form, then it is assumed to be encrypted.
-* Legacy GRUB
-  * If a password starts with '$1$', '$5$', or '$6$' then it is assumed to be
-    encrypted.
+* If a password is in PBKDF2 form, then it is assumed to be encrypted.
 
 ##### <a name="-simp_grub--admin"></a>`admin`
 
-Data type: `Optional[String[1]]`
+Data type: `String[1]`
 
-The administrative username GRUB 2 systems.
-
-Default value: `undef`
+The administrative username for GRUB 2.
 
 ##### <a name="-simp_grub--purge_unmanaged_users"></a>`purge_unmanaged_users`
 
