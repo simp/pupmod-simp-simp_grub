@@ -12,7 +12,7 @@ describe 'simp_grub class' do
 
   hosts.each do |host|
     context "on #{host}" do
-      grub2_installed = on(host, 'test -d /etc/grub.d && (which grub2-mkconfig || which grub-mkconfig)', accept_all_exit_codes: true).exit_code == 0
+      simp_grub__grub2_installed = on(host, 'test -d /etc/grub.d && (which grub2-mkconfig || which grub-mkconfig)', accept_all_exit_codes: true).exit_code == 0
 
       let(:hieradata) do
         {
@@ -30,7 +30,7 @@ describe 'simp_grub class' do
         apply_manifest_on(host, manifest, catch_changes: true)
       end
 
-      if grub2_installed
+      if simp_grub__grub2_installed
         let(:grub_cfg) { on(host, 'cat /etc/grub2.cfg').output.lines }
         let(:password_entries) do
           passwords = grub_cfg.grep(%r{password_pbkdf2})

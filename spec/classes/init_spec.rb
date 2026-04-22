@@ -5,7 +5,7 @@ describe 'simp_grub' do
     on_supported_os.each do |os, os_facts|
       context "on #{os}" do
         let(:facts) do
-          os_facts.merge({ grub2_installed: true })
+          os_facts.merge({ simp_grub__grub2_installed: true })
         end
 
         context 'with useful parameters' do
@@ -66,7 +66,7 @@ describe 'simp_grub' do
 
         context 'when grub2 is not installed' do
           let(:facts) do
-            os_facts.merge({ grub2_installed: false })
+            os_facts.merge({ simp_grub__grub2_installed: false })
           end
 
           let(:params) do

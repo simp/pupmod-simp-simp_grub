@@ -31,7 +31,7 @@ class simp_grub (
 ) {
   simplib::assert_metadata($module_name)
 
-  if $facts['grub2_installed'] {
+  if $facts['simp_grub__grub2_installed'] {
     grub_user { $admin:
       password         => $password,
       superuser        => true,
