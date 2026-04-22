@@ -118,6 +118,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{matrix.puppet.ruby_version}}
+          bundler: '2.7.2'
           bundler-cache: true
       - run: 'command -v rpm || if command -v apt-get; then sudo apt-get update; sudo apt-get install -y rpm; fi ||:'
       - run: 'bundle exec rake spec'
@@ -147,9 +148,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 4.0.3
+          bundler: '2.7.2'
       - name: bundle install
-        run: |
-          bundle install
+        run: bundle _2.7.2_ install
       - name: Setup podman
         run: |
           systemctl start --user podman.socket
