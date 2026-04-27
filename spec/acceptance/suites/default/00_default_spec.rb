@@ -12,7 +12,7 @@ describe 'simp_grub class' do
 
   hosts.each do |host|
     context "on #{host}" do
-      simp_grub__grub2_installed = on(host, 'test -d /etc/grub.d && (which grub2-mkconfig || which grub-mkconfig)', accept_all_exit_codes: true).exit_code == 0
+      simp_grub__grub2_installed = on(host, 'test -d /etc/grub.d && (command -v grub2-mkconfig || command -v grub-mkconfig)', accept_all_exit_codes: true).exit_code == 0
 
       let(:hieradata) do
         {

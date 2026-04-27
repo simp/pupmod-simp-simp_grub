@@ -60,7 +60,7 @@ describe 'simp_grub' do
           it {
             expect {
               is_expected.to(compile.with_all_deps)
-            }.to raise_error(%r{expects a value for parameter 'admin'})
+            }.to raise_error(%r{\$admin is required when GRUB 2 is installed})
           }
         end
 
@@ -69,15 +69,28 @@ describe 'simp_grub' do
             os_facts.merge({ simp_grub__grub2_installed: false })
           end
 
-          let(:params) do
-            {
-              password: 'some password',
-              admin: 'root',
-            }
+          context 'with admin parameter' do
+            let(:params) do
+              {
+                password: 'some password',
+                admin: 'root',
+              }
+            end
+
+            it { is_expected.to compile.with_all_deps }
+            it { is_expected.not_to contain_grub_user('root') }
           end
 
-          it { is_expected.to compile.with_all_deps }
-          it { is_expected.not_to contain_grub_user('root') }
+          context 'without admin parameter' do
+            let(:params) do
+              {
+                password: 'some password',
+              }
+            end
+
+            it { is_expected.to compile.with_all_deps }
+            it { is_expected.not_to contain_grub_user('root') }
+          end
         end
       end
     end

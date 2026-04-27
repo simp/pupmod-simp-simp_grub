@@ -24,7 +24,7 @@
 # @author https://github.com/simp/pupmod-simp-simp/contributors
 class simp_grub (
   String[1]             $password,
-  String[1]             $admin,
+  Optional[String[1]]   $admin                 = undef,
   Optional[Boolean]     $purge_unmanaged_users  = undef,
   Optional[Boolean]     $report_unmanaged_users = undef,
   Optional[Integer[10]] $hash_rounds            = undef
@@ -32,6 +32,9 @@ class simp_grub (
   simplib::assert_metadata($module_name)
 
   if $facts['simp_grub__grub2_installed'] {
+    if $admin == undef {
+      fail('simp_grub: $admin is required when GRUB 2 is installed')
+    }
     grub_user { $admin:
       password         => $password,
       superuser        => true,
