@@ -107,7 +107,7 @@ jobs:
         puppet:
           - label: 'Puppet 8.x'
             puppet_version: '~> 8.0'
-            ruby_version: '4.0.3'
+            ruby_version: '3.2'
             experimental: false
       fail-fast: false
     env:
@@ -118,7 +118,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{matrix.puppet.ruby_version}}
-          bundler: '2.7.2'
           bundler-cache: true
       - run: 'command -v rpm || if command -v apt-get; then sudo apt-get update; sudo apt-get install -y rpm; fi ||:'
       - run: 'bundle exec rake spec'
@@ -147,8 +146,7 @@ jobs:
       - name: setup ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '4.0.3'
-          bundler: '2.7.2'
+          ruby-version: '3.4'
       - name: bundle install
         run: bundle _2.7.2_ install
       - name: Setup podman
