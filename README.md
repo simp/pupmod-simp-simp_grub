@@ -15,7 +15,6 @@
   * [What simp_grub affects](#what-simp_grub-affects)
 * [Usage](#usage)
   * [GRUB2](#grub2)
-  * [Legacy GRUB](#legacy-grub)
 * [Limitations](#limitations)
 * [Development](#development)
   * [Unit tests](#unit-tests)
@@ -35,14 +34,13 @@ Please read our [Contribution Guide] (https://simp.readthedocs.io/en/stable/cont
 
 ## Module Description
 
-Provides a Hiera-friendly interface to GRUB configuration activities.
+Provides a Hiera-friendly interface to GRUB 2 configuration activities.
 
-Currently supports setting administrative GRUB passwords on both GRUB 2 and
-legacy GRUB systems.
+Currently supports setting administrative GRUB 2 passwords.
 
 See [REFERENCE.md](REFERENCE.md) for more details.
 
-See [herculesteam/augeasproviders_grub](https://forge.puppet.com/modules/herculesteam/augeasproviders_grub)
+See [puppet/augeasproviders_grub](https://forge.puppet.com/modules/puppet/augeasproviders_grub)
 for additional information on GRUB management.
 
 ## Setup
@@ -58,7 +56,7 @@ password protect GRUB.
 
 ### GRUB2
 
-You must set the administrative username on GRUB2 systems.
+You must set the administrative username.
 
 Example: Set the admin username:
 
@@ -68,11 +66,6 @@ simp_grub::admin: my_admin_username
 ```
 
 Passwords that are not in PBKDF2 format will be encrypted for you.
-
-### Legacy GRUB
-
-On legacy systems, password entries that do not start with `$1$`, `$5$`, or
-`$6$` will be encrypted for you.
 
 ## Limitations
 

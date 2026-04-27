@@ -5,10 +5,8 @@ describe 'simp_grub' do
     on_supported_os.each do |os, os_facts|
       context "on #{os}" do
         let(:facts) do
-          os_facts
+          os_facts.merge({ simp_grub__grub2_installed: true })
         end
-
-        let(:uniqueid) { '0875ff34' }
 
         context 'with useful parameters' do
           let(:params) do
@@ -20,17 +18,12 @@ describe 'simp_grub' do
 
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to create_class('simp_grub') }
-
-          if os_facts[:augeasprovider_grub_version] == 1
-            it { is_expected.to create_exec('Set Grub Password') }
-          else
-            it {
-              is_expected.to create_grub_user(params[:admin]).with(
-                password: params[:password],
-                superuser: true,
-              )
-            }
-          end
+          it {
+            is_expected.to create_grub_user(params[:admin]).with(
+              password: params[:password],
+              superuser: true,
+            )
+          }
         end
 
         context 'with all parameters' do
@@ -46,76 +39,57 @@ describe 'simp_grub' do
 
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to create_class('simp_grub') }
-
-          if os_facts[:augeasprovider_grub_version] == 1
-            it { is_expected.to create_exec('Set Grub Password') }
-          else
-            it {
-              is_expected.to create_grub_user(params[:admin]).with(
-                password: params[:password],
-                superuser: true,
-                report_unmanaged: params[:report_unmanaged_users],
-                purge: params[:purge_unmanaged_users],
-                rounds: params[:hash_rounds],
-              )
-            }
-          end
+          it {
+            is_expected.to create_grub_user(params[:admin]).with(
+              password: params[:password],
+              superuser: true,
+              report_unmanaged: params[:report_unmanaged_users],
+              purge: params[:purge_unmanaged_users],
+              rounds: params[:hash_rounds],
+            )
+          }
         end
 
-        if os_facts[:augeasprovider_grub_version] == 1
-          context 'with GRUB 0.99' do
-            let(:params) do
-              {
-                password: test_pass,
-              }
-            end
-
-            context 'with MD5 password' do
-              let(:test_pass) do
-                require 'digest'
-
-                '$1$' + 'uniqueid' + '$' +
-                  Digest::MD5.hexdigest('my password' + 'uniqueid')
-              end
-
-              it { is_expected.to create_exec('Set Grub Password').with_unless("grep -qx 'password --encrypted #{test_pass}' /etc/grub.conf") }
-            end
-
-            context 'with SHA256 password' do
-              let(:test_pass) do
-                require 'digest'
-
-                '$5$' + 'uniqueid' + '$' +
-                  Digest::SHA2.new(256).hexdigest('my password' + 'uniqueid')
-              end
-
-              it { is_expected.to create_exec('Set Grub Password').with_unless("grep -qx 'password --encrypted #{test_pass}' /etc/grub.conf") }
-            end
-
-            context 'with SHA512 password' do
-              let(:test_pass) do
-                require 'digest'
-
-                '$5$' + 'uniqueid' + '$' +
-                  Digest::SHA2.new(512).hexdigest('my password' + 'uniqueid')
-              end
-
-              it { is_expected.to create_exec('Set Grub Password').with_unless("grep -qx 'password --encrypted #{test_pass}' /etc/grub.conf") }
-            end
-          end
-        else
-          context 'with GRUB 2' do
-            let(:params) do
-              {
-                password: 'grub two',
-              }
-            end
-
-            it {
-              expect {
-                is_expected.to(compile.with_all_deps)
-              }.to raise_error(%r{You must pass "\$admin})
+        context 'without admin parameter' do
+          let(:params) do
+            {
+              password: 'grub two',
             }
+          end
+
+          it {
+            expect {
+              is_expected.to(compile.with_all_deps)
+            }.to raise_error(%r{\$admin is required when GRUB 2 is installed})
+          }
+        end
+
+        context 'when grub2 is not installed' do
+          let(:facts) do
+            os_facts.merge({ simp_grub__grub2_installed: false })
+          end
+
+          context 'with admin parameter' do
+            let(:params) do
+              {
+                password: 'some password',
+                admin: 'root',
+              }
+            end
+
+            it { is_expected.to compile.with_all_deps }
+            it { is_expected.not_to contain_grub_user('root') }
+          end
+
+          context 'without admin parameter' do
+            let(:params) do
+              {
+                password: 'some password',
+              }
+            end
+
+            it { is_expected.to compile.with_all_deps }
+            it { is_expected.not_to contain_grub_user('root') }
           end
         end
       end
