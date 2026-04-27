@@ -148,7 +148,7 @@ jobs:
         with:
           ruby-version: '3.4'
       - name: bundle install
-        run: bundle _2.7.2_ install
+        run: bundle install
       - name: Setup podman
         run: |
           systemctl start --user podman.socket
