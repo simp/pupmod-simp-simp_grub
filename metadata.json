@@ -1,12 +1,12 @@
 {
   "name": "simp-simp_grub",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "SIMP Team",
   "summary": "Common GRUB management items",
   "license": "Apache-2.0",
   "source": "https://github.com/simp/pupmod-simp-simp_grub",
   "project_page": "https://github.com/simp/pupmod-simp-simp_grub",
-  "issues_url": "https://simp-project.atlassian.net",
+  "issues_url": "https://github.com/simp/pupmod-simp-simp_grub/issues",
   "tags": [
     "simp"
   ],
@@ -21,13 +21,13 @@
     },
     {
       "name": "simp/simplib",
-      "version_requirement": ">= 6.0.0 < 7.0.0"
+      "version_requirement": ">= 5.0.0 < 6.0.0"
     }
   ],
   "requirements": [
     {
-      "name": "puppet",
-      "version_requirement": ">= 7.0.0 < 9.0.0"
+      "name": "openvox",
+      "version_requirement": ">= 8.0.0 < 9.0.0"
     }
   ],
   "operatingsystem_support": [
