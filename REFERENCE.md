@@ -36,9 +36,11 @@ converted for you.
 
 ##### <a name="-simp_grub--admin"></a>`admin`
 
-Data type: `String[1]`
+Data type: `Optional[String[1]]`
 
 The administrative username for GRUB 2.
+
+Default value: `undef`
 
 ##### <a name="-simp_grub--purge_unmanaged_users"></a>`purge_unmanaged_users`
 
