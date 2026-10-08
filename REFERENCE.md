@@ -65,4 +65,3 @@ Data type: `Optional[Integer[10]]`
 The rounds to use when hashing the password for GRUB 2 systems.
 
 Default value: `undef`
-
